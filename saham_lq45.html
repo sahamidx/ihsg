@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8">
+<style>
+body { font-family: sans-serif; font-size: 14px; }
+#sahamWidget { border: 1px solid #ccc; padding: 10px; border-radius: 6px; }
+select { width: 100%; margin-bottom: 10px; }
+.naik { color: green; } .turun { color: red; } .gagal { color: gray; font-style: italic; }
+.ihsg-box { padding: 8px; margin-bottom: 10px; border-radius: 5px; color: white; }
+.ihsg-box.naik { background-color: #4CAF50; }
+.ihsg-box.turun { background-color: #f44336; }
+.ihsg-box.gagal { background-color: #999; }
+</style></head><body>
+<div id="sahamWidget">
+  <h4>Harga Saham Hari Ini – Senin, 07 July 2025</h4>
+  <div class='ihsg-box naik'><strong>IHSG:</strong> 6.901 <span>(+0.52%)</span></div>
+  <select id="dropdownSaham">
+    <option value="ACES">ACES</option>
+    <option value="ADMR">ADMR</option>
+    <option value="ADRO">ADRO</option>
+    <option value="AKRA">AKRA</option>
+    <option value="AMMN">AMMN</option>
+    <option value="AMRT">AMRT</option>
+    <option value="ANTM">ANTM</option>
+    <option value="ARTO">ARTO</option>
+    <option value="ASII">ASII</option>
+    <option value="BBCA">BBCA</option>
+    <option value="BBNI">BBNI</option>
+    <option value="BBRI">BBRI</option>
+    <option value="BBTN">BBTN</option>
+    <option value="BMRI">BMRI</option>
+    <option value="BRIS">BRIS</option>
+    <option value="BRPT">BRPT</option>
+    <option value="CPIN">CPIN</option>
+    <option value="CTRA">CTRA</option>
+    <option value="ESSA">ESSA</option>
+    <option value="EXCL">EXCL</option>
+    <option value="GOTO">GOTO</option>
+    <option value="ICBP">ICBP</option>
+    <option value="INCO">INCO</option>
+    <option value="INDF">INDF</option>
+    <option value="INKP">INKP</option>
+    <option value="ISAT">ISAT</option>
+    <option value="ITMG">ITMG</option>
+    <option value="JPFA">JPFA</option>
+    <option value="JSMR">JSMR</option>
+    <option value="KLBF">KLBF</option>
+    <option value="MAPA">MAPA</option>
+    <option value="MAPI">MAPI</option>
+    <option value="MBMA">MBMA</option>
+    <option value="MDKA">MDKA</option>
+    <option value="MEDC">MEDC</option>
+    <option value="PGAS">PGAS</option>
+    <option value="PGEO">PGEO</option>
+    <option value="PTBA">PTBA</option>
+    <option value="SIDO">SIDO</option>
+    <option value="SMGR">SMGR</option>
+    <option value="SMRA">SMRA</option>
+    <option value="TLKM">TLKM</option>
+    <option value="TOWR">TOWR</option>
+    <option value="UNTR">UNTR</option>
+    <option value="UNVR">UNVR</option>
+  </select>
+  <div id="infoHarga"></div>
+</div>
+<script>
+const data = {"ACES": {"harga": "Rp484", "change": "-0.41%"}, "ADMR": {"harga": "Rp935", "change": "-2.60%"}, "ADRO": {"harga": "Rp1.740", "change": "-0.85%"}, "AKRA": {"harga": "Rp1.170", "change": "-1.68%"}, "AMMN": {"harga": "Rp8.400", "change": "-1.18%"}, "AMRT": {"harga": "Rp2.400", "change": "+3.00%"}, "ANTM": {"harga": "Rp2.910", "change": "-3.00%"}, "ARTO": {"harga": "Rp1.740", "change": "+1.16%"}, "ASII": {"harga": "Rp4.680", "change": "+1.30%"}, "BBCA": {"harga": "Rp8.625", "change": "-0.29%"}, "BBNI": {"harga": "Rp4.000", "change": "+0.00%"}, "BBRI": {"harga": "Rp3.700", "change": "+0.82%"}, "BBTN": {"harga": "Rp1.085", "change": "+0.00%"}, "BMRI": {"harga": "Rp4.740", "change": "+0.00%"}, "BRIS": {"harga": "Rp2.570", "change": "+0.78%"}, "BRPT": {"harga": "Rp1.660", "change": "+7.10%"}, "CPIN": {"harga": "Rp4.740", "change": "+3.49%"}, "CTRA": {"harga": "Rp980", "change": "-0.51%"}, "ESSA": {"harga": "Rp570", "change": "-0.87%"}, "EXCL": {"harga": "Rp2.290", "change": "-0.43%"}, "GOTO": {"harga": "Rp60", "change": "+1.69%"}, "ICBP": {"harga": "Rp10.500", "change": "-1.41%"}, "INCO": {"harga": "Rp3.420", "change": "-3.93%"}, "INDF": {"harga": "Rp8.100", "change": "+0.00%"}, "INKP": {"harga": "Rp5.375", "change": "+0.00%"}, "ISAT": {"harga": "Rp2.080", "change": "-0.48%"}, "ITMG": {"harga": "Rp22.100", "change": "+0.00%"}, "JPFA": {"harga": "Rp1.505", "change": "+1.69%"}, "JSMR": {"harga": "Rp3.590", "change": "+0.56%"}, "KLBF": {"harga": "Rp1.500", "change": "-0.99%"}, "MAPA": {"harga": "Rp775", "change": "+6.16%"}, "MAPI": {"harga": "Rp1.250", "change": "+0.81%"}, "MBMA": {"harga": "Rp466", "change": "-0.43%"}, "MDKA": {"harga": "Rp2.050", "change": "-0.97%"}, "MEDC": {"harga": "Rp1.230", "change": "-1.20%"}, "PGAS": {"harga": "Rp1.585", "change": "-1.25%"}, "PGEO": {"harga": "Rp1.430", "change": "+1.78%"}, "PTBA": {"harga": "Rp2.440", "change": "+0.41%"}, "SIDO": {"harga": "Rp488", "change": "+0.00%"}, "SMGR": {"harga": "Rp2.680", "change": "+0.75%"}, "SMRA": {"harga": "Rp368", "change": "+0.55%"}, "TLKM": {"harga": "Rp2.700", "change": "+2.66%"}, "TOWR": {"harga": "Rp520", "change": "+0.00%"}, "UNTR": {"harga": "Rp21.450", "change": "-0.46%"}, "UNVR": {"harga": "Rp1.560", "change": "+0.97%"}};
+const infoDiv = document.getElementById("infoHarga");
+const dropdown = document.getElementById("dropdownSaham");
+
+function updateInfo() {
+  const kode = dropdown.value;
+  const item = data[kode];
+  let kelas = "naik";
+  if (item.change === "Gagal ambil data") {{
+    kelas = "gagal";
+  }} else if (item.change.startsWith("-")) {{
+    kelas = "turun";
+  }}
+  infoDiv.innerHTML = `<strong>${kode}</strong><br>Harga: ${item.harga}<br><span class='${kelas}'>Perubahan: ${item.change}</span>`;
+}
+dropdown.addEventListener("change", updateInfo);
+window.addEventListener("load", updateInfo);
+</script></body></html>
