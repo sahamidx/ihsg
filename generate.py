@@ -159,7 +159,7 @@ input.addEventListener('keyup', function() {{
     if (kode.includes(filter) || nama.includes(filter)) {{
       rows[i].style.display = '';
       if (!ketemu && filter.length >= 2) {{
-        hasil.innerHTML = `<h2>Saham ${kode.toUpperCase()} Hari Ini</h2>`;
+        hasil.innerHTML = "<h2>Saham " + kode.toUpperCase() + " Hari Ini</h2>";
         ketemu = true;
       }}
     }} else {{
