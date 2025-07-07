@@ -33,17 +33,17 @@ jobs:
       - name: Push to GitHub
         run: git push
 
-      - name: Upload to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./
-          server-dir: /public_html/idxstock.com/
-          include: ihsg-hari-ini.html
-          exclude: |
+      - name: Upload ihsg-hari-ini.html only
+  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+  with:
+    server: ${{ secrets.FTP_SERVER }}
+    username: ${{ secrets.FTP_USERNAME }}
+    password: ${{ secrets.FTP_PASSWORD }}
+    protocol: ftp
+    local-dir: ./
+    server-dir: /
+    include: ihsg-hari-ini.html
+
             **/.git*
             **/.github*
             LICENSE
