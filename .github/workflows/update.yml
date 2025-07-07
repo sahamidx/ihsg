@@ -27,8 +27,8 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add saham_lq45.html
-          git commit -m "Update saham_lq45.html" || echo "No changes to commit"
+          git add ihsg-hari-ini.html
+          git commit -m "Update ihsg-hari-ini.html" || echo "No changes to commit"
 
       - name: Push to GitHub
         run: git push
@@ -42,6 +42,7 @@ jobs:
           protocol: ftps
           local-dir: ./
           server-dir: /public_html/idxstock.com/
+          include: ihsg-hari-ini.html
           exclude: |
             **/.git*
             **/.github*

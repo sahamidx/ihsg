@@ -172,7 +172,7 @@ input.addEventListener('input', function () {{
 </html>
 """
 
-with open("saham_lq45.html", "w", encoding="utf-8") as f:
+with open("ihsg-hari-ini.html", "w", encoding="utf-8") as f:
     f.write(html)
 
-print("✅ sukses: saham_lq45.html dibuat.")
+print("✅ sukses: ihsg-hari-ini.html dibuat.")
