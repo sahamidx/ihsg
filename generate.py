@@ -79,7 +79,7 @@ today = datetime.now().strftime("%d %B %Y")
 ihsg = fetch_ihsg()
 ihsg_html = ""
 if ihsg:
-    arah = "naik" if ihsg[1] >= 0 else "turun"
+    arah = "naik" if ihsg[1] >= 0.0 else "turun"
     ihsg_html = f"<h2>IHSG Hari Ini</h2><p><strong>{ihsg[0]:,}".replace(",", ".") + f"</strong> ({ihsg[1]:+.2f}%)</p>"
 
 # Fetch semua saham
