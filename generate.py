@@ -1,53 +1,29 @@
 import yfinance as yf
 from datetime import datetime
+import locale
 
-# Kode saham + nama perusahaan singkat
+# Format tanggal lokal (Indonesia)
+try:
+    locale.setlocale(locale.LC_TIME, 'id_ID.UTF-8')
+except:
+    locale.setlocale(locale.LC_TIME, '')
+
+# Saham LQ45 + nama singkat
 SAHAM_LQ45 = {
-    "ACES": "Ace Hardware",
-    "ADMR": "Adaro Minerals",
-    "ADRO": "Adaro Energy",
-    "AKRA": "AKR Corporindo",
-    "AMMN": "Amman Mineral",
-    "AMRT": "Alfamart",
-    "ANTM": "Aneka Tambang",
-    "ARTO": "Bank Jago",
-    "ASII": "Astra International",
-    "BBCA": "Bank Central Asia",
-    "BBNI": "Bank Negara Indonesia",
-    "BBRI": "Bank Rakyat Indonesia",
-    "BBTN": "Bank Tabungan Negara",
-    "BMRI": "Bank Mandiri",
-    "BRIS": "BRI Syariah",
-    "BRPT": "Barito Pacific",
-    "CPIN": "Charoen Pokphand",
-    "CTRA": "Ciputra Development",
-    "ESSA": "Surya Esa Perkasa",
-    "EXCL": "XL Axiata",
-    "GOTO": "GoTo Gojek Tokopedia",
-    "ICBP": "Indofood CBP",
-    "INCO": "Vale Indonesia",
-    "INDF": "Indofood Sukses Makmur",
-    "INKP": "Indah Kiat Pulp",
-    "ISAT": "Indosat Ooredoo Hutchison",
-    "ITMG": "Indo Tambangraya",
-    "JPFA": "Japfa Comfeed",
-    "JSMR": "Jasa Marga",
-    "KLBF": "Kalbe Farma",
-    "MAPA": "Map Aktif Adiperkasa",
-    "MAPI": "Mitra Adiperkasa",
-    "MBMA": "Merdeka Battery",
-    "MDKA": "Merdeka Copper Gold",
-    "MEDC": "Medco Energi",
-    "PGAS": "Perusahaan Gas Negara",
-    "PGEO": "Pertamina Geothermal",
-    "PTBA": "Bukit Asam",
-    "SIDO": "Industri Jamu Sido Muncul",
-    "SMGR": "Semen Indonesia",
-    "SMRA": "Summarecon Agung",
-    "TLKM": "Telkom Indonesia",
-    "TOWR": "Sarana Menara Nusantara",
-    "UNTR": "United Tractors",
-    "UNVR": "Unilever Indonesia"
+    "ACES": "Ace Hardware", "ADMR": "Adaro Minerals", "ADRO": "Adaro Energy", "AKRA": "AKR Corporindo",
+    "AMMN": "Amman Mineral", "AMRT": "Alfamart", "ANTM": "Aneka Tambang", "ARTO": "Bank Jago",
+    "ASII": "Astra International", "BBCA": "Bank Central Asia", "BBNI": "Bank Negara Indonesia",
+    "BBRI": "Bank Rakyat Indonesia", "BBTN": "Bank Tabungan Negara", "BMRI": "Bank Mandiri",
+    "BRIS": "BRI Syariah", "BRPT": "Barito Pacific", "CPIN": "Charoen Pokphand", "CTRA": "Ciputra Development",
+    "ESSA": "Surya Esa Perkasa", "EXCL": "XL Axiata", "GOTO": "GoTo Gojek Tokopedia",
+    "ICBP": "Indofood CBP", "INCO": "Vale Indonesia", "INDF": "Indofood Sukses Makmur",
+    "INKP": "Indah Kiat Pulp", "ISAT": "Indosat Ooredoo Hutchison", "ITMG": "Indo Tambangraya",
+    "JPFA": "Japfa Comfeed", "JSMR": "Jasa Marga", "KLBF": "Kalbe Farma", "MAPA": "Map Aktif",
+    "MAPI": "Mitra Adiperkasa", "MBMA": "Merdeka Battery", "MDKA": "Merdeka Copper Gold",
+    "MEDC": "Medco Energi", "PGAS": "Perusahaan Gas Negara", "PGEO": "Pertamina Geothermal",
+    "PTBA": "Bukit Asam", "SIDO": "Sido Muncul", "SMGR": "Semen Indonesia",
+    "SMRA": "Summarecon", "TLKM": "Telkom Indonesia", "TOWR": "Sarana Menara Nusantara",
+    "UNTR": "United Tractors", "UNVR": "Unilever Indonesia"
 }
 
 def fetch_price(symbol):
@@ -57,60 +33,68 @@ def fetch_price(symbol):
         harga = round(data["Close"].iloc[-1].item())
         harga_kemarin = round(data["Close"].iloc[-2].item())
         perubahan = ((harga - harga_kemarin) / harga_kemarin) * 100
-        return harga, perubahan
+        return harga, round(perubahan, 2)
     except:
         return None
 
 def fetch_ihsg():
     try:
         data = yf.download("^JKSE", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
-        if len(data) < 2:
-            return None
-        harga = data["Close"].iloc[-1].item()
-        kemarin = data["Close"].iloc[-2].item()
+        if len(data) < 2: return None
+        harga = round(data["Close"].iloc[-1].item())
+        kemarin = round(data["Close"].iloc[-2].item())
         perubahan = ((harga - kemarin) / kemarin) * 100
-        return round(harga), round(perubahan, 2)
+        return harga, round(perubahan, 2)
     except:
         return None
 
-# Waktu hari ini
-today = datetime.now().strftime("%d %B %Y")
+# Tanggal
+tanggal = datetime.now().strftime("%A, %d %B %Y")
+tanggal = tanggal.replace('Sunday', 'Minggu').replace('Monday', 'Senin').replace('Tuesday', 'Selasa')\
+    .replace('Wednesday', 'Rabu').replace('Thursday', 'Kamis').replace('Friday', 'Jumat')\
+    .replace('Saturday', 'Sabtu')
 
-# Fetch IHSG
-ihsg = fetch_ihsg()
-ihsg_html = ""
-if ihsg:
-    arah = "naik" if ihsg[1] >= 0 else "turun"
-    ihsg_html = f"<h2>IHSG Hari Ini</h2><p><strong>{ihsg[0]:,}".replace(",", ".") + f"</strong> ({ihsg[1]:+.2f}%)</p>"
+# IHSG box
+ihsg_data = fetch_ihsg()
+if ihsg_data:
+    arah = "naik" if ihsg_data[1] >= 0 else "turun"
+    warna = "naik" if ihsg_data[1] >= 0 else "turun"
+    ihsg_html = f"""
+    <h2>IHSG Hari Ini</h2>
+    <div class="ihsg-box {warna}">{ihsg_data[0]:,} ({ihsg_data[1]:+.2f}%)</div>
+    """.replace(",", ".")
+else:
+    ihsg_html = ""
 
-# Fetch semua saham
+# Saham rows
 rows = ""
 data_dict = {}
 for kode, nama in SAHAM_LQ45.items():
     result = fetch_price(kode)
     if result:
         harga, perubahan = result
+        warna = "naik" if perubahan >= 0 else "turun"
         harga_str = f"Rp{harga:,}".replace(",", ".")
-        perubahan_str = f"{perubahan:+.2f}%"
-    else:
-        harga_str = "N/A"
-        perubahan_str = "N/A"
-    rows += f"<tr><td>{kode}</td><td>{nama}</td><td>{harga_str}</td><td>{perubahan_str}</td></tr>\n"
-    data_dict[kode] = nama
+        perubahan_str = f'<td class="{warna}">{perubahan:+.2f}%</td>'
+        rows += f"<tr><td>{kode}</td><td>{nama}</td><td>{harga_str}</td>{perubahan_str}</tr>\n"
+        data_dict[kode] = nama
 
-# HTML Output
+# HTML output
 html = f"""<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+  <title>Harga Saham Hari Ini – {tanggal}</title>
+  <meta name="description" content="Harga saham LQ45 dan IHSG hari ini, termasuk BBCA, BBRI, TLKM, dan lainnya. Update otomatis setiap 30 menit.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Harga Saham LQ45 dan IHSG Hari Ini</title>
-  <meta name="description" content="Lihat harga terbaru saham LQ45 dan IHSG hari ini. Termasuk BBCA, BBRI, TLKM, dan lainnya. Update otomatis setiap 30 menit.">
   <style>
     body {{ font-family: Arial, sans-serif; padding: 20px; }}
     h1, h2 {{ color: #333; }}
+    .ihsg-box {{ font-size: 1.4em; font-weight: bold; margin-bottom: 20px; }}
+    .naik {{ color: green; }}
+    .turun {{ color: red; }}
     input {{ width: 100%; padding: 8px; margin-bottom: 15px; }}
-    table {{ border-collapse: collapse; width: 100%; }}
+    table {{ border-collapse: collapse; width: 100%; display: none; }}
     th, td {{ border: 1px solid #ccc; padding: 8px; text-align: left; }}
     th {{ background-color: #f4f4f4; }}
     tr.hide {{ display: none; }}
@@ -130,10 +114,10 @@ html = f"""<!DOCTYPE html>
   </style>
 </head>
 <body>
-  <h1>Harga Saham Hari Ini (LQ45 dan IHSG)</h1>
-  <p>Data per {today}. Halaman ini menampilkan harga terbaru dari saham-saham terlikuid di Indonesia beserta IHSG, diperbarui otomatis setiap 30 menit.</p>
+  <h1>Saham Hari Ini</h1>
+  <p>Harga Saham Hari Ini – {tanggal}</p>
   {ihsg_html}
-  <input type="text" id="cari" placeholder="Cari saham BBCA, Telkom, Unilever...">
+  <input type="text" id="cari" placeholder="Cari saham BBRI, Telkom, Unilever...">
   <div id="hasil"></div>
   <table id="tabel">
     <thead>
@@ -145,14 +129,26 @@ html = f"""<!DOCTYPE html>
   </table>
 <script>
 const input = document.getElementById('cari');
-const tabel = document.getElementById('tabel').getElementsByTagName('tbody')[0];
+const tabel = document.getElementById('tabel');
+const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
 const data = {str(data_dict)};
 
-input.addEventListener('keyup', function() {{
+tabel.style.display = 'none';
+
+input.addEventListener('input', function () {{
   const filter = this.value.toLowerCase();
-  const rows = tabel.getElementsByTagName('tr');
+  const rows = tbody.getElementsByTagName('tr');
   let ketemu = false;
+
+  if (filter.length > 0) {{
+    tabel.style.display = 'table';
+  }} else {{
+    tabel.style.display = 'none';
+    hasil.innerHTML = '';
+    return;
+  }}
+
   for (let i = 0; i < rows.length; i++) {{
     const kode = rows[i].cells[0].textContent.toLowerCase();
     const nama = rows[i].cells[1].textContent.toLowerCase();
@@ -166,7 +162,10 @@ input.addEventListener('keyup', function() {{
       rows[i].style.display = 'none';
     }}
   }}
-  if (!ketemu) hasil.innerHTML = '';
+
+  if (!ketemu) {{
+    hasil.innerHTML = '';
+  }}
 }});
 </script>
 </body>
