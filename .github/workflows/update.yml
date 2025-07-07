@@ -1,9 +1,9 @@
 name: Update Saham Widget
 
 on:
-  schedule:
-    - cron: '*/30 * * * *'  # setiap 30 menit (UTC)
   workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'  # setiap 30 menit
 
 jobs:
   build:
@@ -18,15 +18,32 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install yfinance pandas
+        run: pip install yfinance
 
-      - name: Generate HTML
+      - name: Generate HTML saham
         run: python generate.py
 
-      - name: Commit & Push
+      - name: Commit HTML
         run: |
           git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.email "actions@github.com"
           git add saham_lq45.html
-          git commit -m "Update saham_lq45.html"
-          git push
+          git commit -m "Update saham_lq45.html" || echo "No changes to commit"
+
+      - name: Push to GitHub
+        run: git push
+
+      - name: Upload to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: /public_html/idxstock.com/
+          exclude: |
+            **/.git*
+            **/.github*
+            LICENSE
+            README.md
