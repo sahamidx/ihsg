@@ -3,11 +3,12 @@ name: Update Saham Widget
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'  # setiap 30 menit
+    - cron: '*/30 * * * *'  # Jalankan tiap 30 menit
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -20,31 +21,24 @@ jobs:
       - name: Install dependencies
         run: pip install yfinance
 
-      - name: Generate HTML saham
+      - name: Generate HTML
         run: python generate.py
 
-      - name: Commit HTML
+      - name: Commit generated HTML
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add ihsg-hari-ini.html
-          git commit -m "Update ihsg-hari-ini.html" || echo "No changes to commit"
-
-      - name: Push to GitHub
-        run: git push
+          git commit -m "Update ihsg-hari-ini.html" || echo "No changes"
+          git push
 
       - name: Upload ihsg-hari-ini.html only
-  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-  with:
-    server: ${{ secrets.FTP_SERVER }}
-    username: ${{ secrets.FTP_USERNAME }}
-    password: ${{ secrets.FTP_PASSWORD }}
-    protocol: ftp
-    local-dir: ./
-    server-dir: /
-    include: ihsg-hari-ini.html
-
-            **/.git*
-            **/.github*
-            LICENSE
-            README.md
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          local-dir: ./
+          server-dir: /
+          include: ihsg-hari-ini.html
