@@ -54,8 +54,8 @@ def fetch_price(symbol):
     try:
         data = yf.download(symbol + ".JK", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
         if len(data) < 2: return None
-        harga = round(data["Close"].iloc[-1])
-        harga_kemarin = round(data["Close"].iloc[-2])
+        harga = round(data["Close"].iloc[-1].item())
+        harga_kemarin = round(data["Close"].iloc[-2].item())
         perubahan = ((harga - harga_kemarin) / harga_kemarin) * 100
         return harga, perubahan
     except:
@@ -66,8 +66,8 @@ def fetch_ihsg():
         data = yf.download("^JKSE", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
         if len(data) < 2:
             return None
-        harga = float(data["Close"].iloc[-1])
-        kemarin = float(data["Close"].iloc[-2])
+        harga = data["Close"].iloc[-1].item()
+        kemarin = data["Close"].iloc[-2].item()
         perubahan = ((harga - kemarin) / kemarin) * 100
         return round(harga), round(perubahan, 2)
     except:
