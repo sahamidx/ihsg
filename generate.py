@@ -64,11 +64,12 @@ def fetch_price(symbol):
 def fetch_ihsg():
     try:
         data = yf.download("^JKSE", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
-        if len(data) < 2: return None
-        harga = round(data["Close"].iloc[-1])
-        kemarin = round(data["Close"].iloc[-2])
+        if len(data) < 2:
+            return None
+        harga = float(data["Close"].iloc[-1])
+        kemarin = float(data["Close"].iloc[-2])
         perubahan = ((harga - kemarin) / kemarin) * 100
-        return harga, perubahan
+        return round(harga), round(perubahan, 2)
     except:
         return None
 
@@ -79,7 +80,7 @@ today = datetime.now().strftime("%d %B %Y")
 ihsg = fetch_ihsg()
 ihsg_html = ""
 if ihsg:
-    arah = "naik" if ihsg[1] >= 0.0 else "turun"
+    arah = "naik" if ihsg[1] >= 0 else "turun"
     ihsg_html = f"<h2>IHSG Hari Ini</h2><p><strong>{ihsg[0]:,}".replace(",", ".") + f"</strong> ({ihsg[1]:+.2f}%)</p>"
 
 # Fetch semua saham
