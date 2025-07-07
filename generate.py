@@ -1,102 +1,178 @@
 import yfinance as yf
-import pandas as pd
 from datetime import datetime
 
-SAHAM_LIST = [
-    "ACES", "ADMR", "ADRO", "AKRA", "AMMN", "AMRT", "ANTM", "ARTO",
-    "ASII", "BBCA", "BBNI", "BBRI", "BBTN", "BMRI", "BRIS", "BRPT",
-    "CPIN", "CTRA", "ESSA", "EXCL", "GOTO", "ICBP", "INCO", "INDF",
-    "INKP", "ISAT", "ITMG", "JPFA", "JSMR", "KLBF", "MAPA", "MAPI",
-    "MBMA", "MDKA", "MEDC", "PGAS", "PGEO", "PTBA", "SIDO", "SMGR",
-    "SMRA", "TLKM", "TOWR", "UNTR", "UNVR"
-]
-
-HARI_INDONESIA = {
-    "Monday": "Senin", "Tuesday": "Selasa", "Wednesday": "Rabu",
-    "Thursday": "Kamis", "Friday": "Jumat", "Saturday": "Sabtu", "Sunday": "Minggu"
+# Kode saham + nama perusahaan singkat
+SAHAM_LQ45 = {
+    "ACES": "Ace Hardware",
+    "ADMR": "Adaro Minerals",
+    "ADRO": "Adaro Energy",
+    "AKRA": "AKR Corporindo",
+    "AMMN": "Amman Mineral",
+    "AMRT": "Alfamart",
+    "ANTM": "Aneka Tambang",
+    "ARTO": "Bank Jago",
+    "ASII": "Astra International",
+    "BBCA": "Bank Central Asia",
+    "BBNI": "Bank Negara Indonesia",
+    "BBRI": "Bank Rakyat Indonesia",
+    "BBTN": "Bank Tabungan Negara",
+    "BMRI": "Bank Mandiri",
+    "BRIS": "BRI Syariah",
+    "BRPT": "Barito Pacific",
+    "CPIN": "Charoen Pokphand",
+    "CTRA": "Ciputra Development",
+    "ESSA": "Surya Esa Perkasa",
+    "EXCL": "XL Axiata",
+    "GOTO": "GoTo Gojek Tokopedia",
+    "ICBP": "Indofood CBP",
+    "INCO": "Vale Indonesia",
+    "INDF": "Indofood Sukses Makmur",
+    "INKP": "Indah Kiat Pulp",
+    "ISAT": "Indosat Ooredoo Hutchison",
+    "ITMG": "Indo Tambangraya",
+    "JPFA": "Japfa Comfeed",
+    "JSMR": "Jasa Marga",
+    "KLBF": "Kalbe Farma",
+    "MAPA": "Map Aktif Adiperkasa",
+    "MAPI": "Mitra Adiperkasa",
+    "MBMA": "Merdeka Battery",
+    "MDKA": "Merdeka Copper Gold",
+    "MEDC": "Medco Energi",
+    "PGAS": "Perusahaan Gas Negara",
+    "PGEO": "Pertamina Geothermal",
+    "PTBA": "Bukit Asam",
+    "SIDO": "Industri Jamu Sido Muncul",
+    "SMGR": "Semen Indonesia",
+    "SMRA": "Summarecon Agung",
+    "TLKM": "Telkom Indonesia",
+    "TOWR": "Sarana Menara Nusantara",
+    "UNTR": "United Tractors",
+    "UNVR": "Unilever Indonesia"
 }
 
-def fetch_data(symbol):
+def fetch_price(symbol):
     try:
-        df = yf.download(symbol + ".JK", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
-        if len(df) < 2: return None
-        harga_today = df["Close"].iloc[-1].item()
-        harga_yesterday = df["Close"].iloc[-2].item()
-        change = ((harga_today - harga_yesterday) / harga_yesterday) * 100
-        return {"harga": f"Rp{round(harga_today):,}".replace(",", "."), "change": f"{change:+.2f}%"}
-    except: return None
+        data = yf.download(symbol + ".JK", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
+        if len(data) < 2: return None
+        harga = round(data["Close"].iloc[-1])
+        harga_kemarin = round(data["Close"].iloc[-2])
+        perubahan = ((harga - harga_kemarin) / harga_kemarin) * 100
+        return harga, perubahan
+    except:
+        return None
 
 def fetch_ihsg():
     try:
-        df = yf.download("^JKSE", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
-        if len(df) < 2: return None
-        harga_today = df["Close"].iloc[-1].item()
-        harga_yesterday = df["Close"].iloc[-2].item()
-        change = ((harga_today - harga_yesterday) / harga_yesterday) * 100
-        return {"harga": f"{round(harga_today):,}".replace(",", "."), "change": f"{change:+.2f}%"}
-    except: return None
+        data = yf.download("^JKSE", period="2d", interval="1d", progress=False, auto_adjust=False).dropna()
+        if len(data) < 2: return None
+        harga = round(data["Close"].iloc[-1])
+        kemarin = round(data["Close"].iloc[-2])
+        perubahan = ((harga - kemarin) / kemarin) * 100
+        return harga, perubahan
+    except:
+        return None
 
-data_saham = {}
-for kode in SAHAM_LIST:
-    hasil = fetch_data(kode)
-    if hasil:
-        data_saham[kode] = hasil
-    else:
-        data_saham[kode] = {"harga": "N/A", "change": "Gagal ambil data"}
+# Waktu hari ini
+today = datetime.now().strftime("%d %B %Y")
 
-now = datetime.now()
-judul_hari = f"{HARI_INDONESIA[now.strftime('%A')]}, {now.strftime('%d %B %Y')}"
+# Fetch IHSG
 ihsg = fetch_ihsg()
+ihsg_html = ""
 if ihsg:
-    arah = "naik" if "-" not in ihsg["change"] else "turun"
-    ihsg_html = f"<div class='ihsg-box {arah}'><strong>IHSG:</strong> {ihsg['harga']} <span>({ihsg['change']})</span></div>"
-else:
-    ihsg_html = "<div class='ihsg-box gagal'><strong>IHSG:</strong> <span>Data tidak tersedia</span></div>"
+    arah = "naik" if ihsg[1] >= 0 else "turun"
+    ihsg_html = f"<h2>IHSG Hari Ini</h2><p><strong>{ihsg[0]:,}".replace(",", ".") + f"</strong> ({ihsg[1]:+.2f}%)</p>"
 
+# Fetch semua saham
+rows = ""
+data_dict = {}
+for kode, nama in SAHAM_LQ45.items():
+    result = fetch_price(kode)
+    if result:
+        harga, perubahan = result
+        harga_str = f"Rp{harga:,}".replace(",", ".")
+        perubahan_str = f"{perubahan:+.2f}%"
+    else:
+        harga_str = "N/A"
+        perubahan_str = "N/A"
+    rows += f"<tr><td>{kode}</td><td>{nama}</td><td>{harga_str}</td><td>{perubahan_str}</td></tr>\n"
+    data_dict[kode] = nama
+
+# HTML Output
 html = f"""<!DOCTYPE html>
-<html lang="id"><head><meta charset="UTF-8">
-<style>
-body {{ font-family: sans-serif; font-size: 14px; }}
-#sahamWidget {{ border: 1px solid #ccc; padding: 10px; border-radius: 6px; }}
-select {{ width: 100%; margin-bottom: 10px; }}
-.naik {{ color: green; }} .turun {{ color: red; }} .gagal {{ color: gray; font-style: italic; }}
-.ihsg-box {{ padding: 8px; margin-bottom: 10px; border-radius: 5px; color: white; }}
-.ihsg-box.naik {{ background-color: #4CAF50; }}
-.ihsg-box.turun {{ background-color: #f44336; }}
-.ihsg-box.gagal {{ background-color: #999; }}
-</style></head><body>
-<div id="sahamWidget">
-  <h4>Harga Saham Hari Ini – {judul_hari}</h4>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harga Saham LQ45 dan IHSG Hari Ini</title>
+  <meta name="description" content="Lihat harga terbaru saham LQ45 dan IHSG hari ini. Termasuk BBCA, BBRI, TLKM, dan lainnya. Update otomatis setiap 30 menit.">
+  <style>
+    body {{ font-family: Arial, sans-serif; padding: 20px; }}
+    h1, h2 {{ color: #333; }}
+    input {{ width: 100%; padding: 8px; margin-bottom: 15px; }}
+    table {{ border-collapse: collapse; width: 100%; }}
+    th, td {{ border: 1px solid #ccc; padding: 8px; text-align: left; }}
+    th {{ background-color: #f4f4f4; }}
+    tr.hide {{ display: none; }}
+    @media(max-width:600px) {{
+      table, thead, tbody, th, td, tr {{ display: block; }}
+      th {{ position: absolute; top: -9999px; left: -9999px; }}
+      td {{ border: none; position: relative; padding-left: 50%; }}
+      td::before {{
+        position: absolute; top: 8px; left: 8px; width: 45%; white-space: nowrap;
+        font-weight: bold;
+      }}
+      td:nth-of-type(1)::before {{ content: "Kode"; }}
+      td:nth-of-type(2)::before {{ content: "Perusahaan"; }}
+      td:nth-of-type(3)::before {{ content: "Harga"; }}
+      td:nth-of-type(4)::before {{ content: "Perubahan"; }}
+    }}
+  </style>
+</head>
+<body>
+  <h1>Harga Saham Hari Ini (LQ45 dan IHSG)</h1>
+  <p>Data per {today}. Halaman ini menampilkan harga terbaru dari saham-saham terlikuid di Indonesia beserta IHSG, diperbarui otomatis setiap 30 menit.</p>
   {ihsg_html}
-  <select id="dropdownSaham">
-"""
-
-for kode in SAHAM_LIST:
-    html += f'    <option value="{kode}">{kode}</option>\n'
-
-html += """  </select>
-  <div id="infoHarga"></div>
-</div>
+  <input type="text" id="cari" placeholder="Cari saham BBCA, Telkom, Unilever...">
+  <div id="hasil"></div>
+  <table id="tabel">
+    <thead>
+      <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
+    </thead>
+    <tbody>
+      {rows}
+    </tbody>
+  </table>
 <script>
-const data = """ + str(data_saham).replace("'", '"') + """;
-const infoDiv = document.getElementById("infoHarga");
-const dropdown = document.getElementById("dropdownSaham");
+const input = document.getElementById('cari');
+const tabel = document.getElementById('tabel').getElementsByTagName('tbody')[0];
+const hasil = document.getElementById('hasil');
+const data = {str(data_dict)};
 
-function updateInfo() {
-  const kode = dropdown.value;
-  const item = data[kode];
-  let kelas = "naik";
-  if (item.change === "Gagal ambil data") {{
-    kelas = "gagal";
-  }} else if (item.change.startsWith("-")) {{
-    kelas = "turun";
+input.addEventListener('keyup', function() {{
+  const filter = this.value.toLowerCase();
+  const rows = tabel.getElementsByTagName('tr');
+  let ketemu = false;
+  for (let i = 0; i < rows.length; i++) {{
+    const kode = rows[i].cells[0].textContent.toLowerCase();
+    const nama = rows[i].cells[1].textContent.toLowerCase();
+    if (kode.includes(filter) || nama.includes(filter)) {{
+      rows[i].style.display = '';
+      if (!ketemu && filter.length >= 2) {{
+        hasil.innerHTML = `<h2>Saham ${kode.toUpperCase()} Hari Ini</h2>`;
+        ketemu = true;
+      }}
+    }} else {{
+      rows[i].style.display = 'none';
+    }}
   }}
-  infoDiv.innerHTML = `<strong>${kode}</strong><br>Harga: ${item.harga}<br><span class='${kelas}'>Perubahan: ${item.change}</span>`;
-}
-dropdown.addEventListener("change", updateInfo);
-window.addEventListener("load", updateInfo);
-</script></body></html>"""
+  if (!ketemu) hasil.innerHTML = '';
+}});
+</script>
+</body>
+</html>
+"""
 
 with open("saham_lq45.html", "w", encoding="utf-8") as f:
     f.write(html)
+
 print("✅ sukses: saham_lq45.html dibuat.")
