@@ -32,7 +32,7 @@ jobs:
           git commit -m "Update ihsg-hari-ini.html" || echo "No changes"
           git push
 
-      - name: Upload ihsg-hari-ini.html via FTP (Hostinger)
+      - name: Upload ihsg-hari-ini.html only
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.idxstock.com
@@ -42,5 +42,4 @@ jobs:
           port: 21
           local-dir: ./
           server-dir: /domains/idxstock.com/public_html/
-          dangerous-clean-slate: true
-          force-upload: true
+          include: ihsg-hari-ini.html
