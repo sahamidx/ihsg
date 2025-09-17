@@ -42,7 +42,10 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      
+      <tr><td>BBNI</td><td>Bank Negara Indonesia</td><td>Rp4.450</td><td class="naik">+1.83%</td></tr>
+<tr><td>BBRI</td><td>Bank Rakyat Indonesia</td><td>Rp4.220</td><td class="naik">+2.18%</td></tr>
+<tr><td>PGAS</td><td>Perusahaan Gas Negara</td><td>Rp1.760</td><td class="naik">+0.86%</td></tr>
+
     </tbody>
   </table>
 <script>
@@ -50,7 +53,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {};
+const data = {'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'PGAS': 'Perusahaan Gas Negara'};
 
 tabel.style.display = 'none';
 
