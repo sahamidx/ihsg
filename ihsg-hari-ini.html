@@ -35,9 +35,6 @@
   <h1>Saham Hari Ini</h1>
   <p>Harga Saham Hari Ini – Rabu, 24 September 2025</p>
   
-    <h2>IHSG Hari Ini</h2>
-    <div class="ihsg-box naik">8.150 (+0.31%)</div>
-    
   <input type="text" id="cari" placeholder="Cari saham BBRI, Telkom, Unilever...">
   <div id="hasil"></div>
   <table id="tabel">
@@ -45,8 +42,9 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      <tr><td>AMRT</td><td>Alfamart</td><td>Rp1.895</td><td class="turun">-1.56%</td></tr>
-<tr><td>GOTO</td><td>GoTo Gojek Tokopedia</td><td>Rp54</td><td class="naik">+0.00%</td></tr>
+      <tr><td>ACES</td><td>Ace Hardware</td><td>Rp426</td><td class="turun">-0.47%</td></tr>
+<tr><td>ADMR</td><td>Adaro Minerals</td><td>Rp1.040</td><td class="naik">+0.00%</td></tr>
+<tr><td>INKP</td><td>Indah Kiat Pulp</td><td>Rp7.275</td><td class="turun">-0.34%</td></tr>
 
     </tbody>
   </table>
@@ -55,7 +53,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {'AMRT': 'Alfamart', 'GOTO': 'GoTo Gojek Tokopedia'};
+const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'INKP': 'Indah Kiat Pulp'};
 
 tabel.style.display = 'none';
 
