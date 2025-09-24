@@ -35,6 +35,9 @@
   <h1>Saham Hari Ini</h1>
   <p>Harga Saham Hari Ini – Rabu, 24 September 2025</p>
   
+    <h2>IHSG Hari Ini</h2>
+    <div class="ihsg-box naik">8.150 (+0.31%)</div>
+    
   <input type="text" id="cari" placeholder="Cari saham BBRI, Telkom, Unilever...">
   <div id="hasil"></div>
   <table id="tabel">
@@ -42,7 +45,35 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      
+      <tr><td>ACES</td><td>Ace Hardware</td><td>Rp426</td><td class="turun">-0.47%</td></tr>
+<tr><td>ADMR</td><td>Adaro Minerals</td><td>Rp1.040</td><td class="naik">+0.00%</td></tr>
+<tr><td>ADRO</td><td>Adaro Energy</td><td>Rp1.760</td><td class="naik">+0.00%</td></tr>
+<tr><td>AMMN</td><td>Amman Mineral</td><td>Rp7.050</td><td class="turun">-2.08%</td></tr>
+<tr><td>AMRT</td><td>Alfamart</td><td>Rp1.895</td><td class="turun">-1.56%</td></tr>
+<tr><td>ANTM</td><td>Aneka Tambang</td><td>Rp3.520</td><td class="turun">-4.09%</td></tr>
+<tr><td>ARTO</td><td>Bank Jago</td><td>Rp2.060</td><td class="turun">-3.74%</td></tr>
+<tr><td>ASII</td><td>Astra International</td><td>Rp5.925</td><td class="naik">+0.42%</td></tr>
+<tr><td>BBCA</td><td>Bank Central Asia</td><td>Rp7.775</td><td class="turun">-1.27%</td></tr>
+<tr><td>BBNI</td><td>Bank Negara Indonesia</td><td>Rp4.180</td><td class="turun">-0.48%</td></tr>
+<tr><td>BBRI</td><td>Bank Rakyat Indonesia</td><td>Rp4.140</td><td class="naik">+0.00%</td></tr>
+<tr><td>BBTN</td><td>Bank Tabungan Negara</td><td>Rp1.285</td><td class="turun">-1.53%</td></tr>
+<tr><td>BMRI</td><td>Bank Mandiri</td><td>Rp4.400</td><td class="turun">-0.23%</td></tr>
+<tr><td>BRPT</td><td>Barito Pacific</td><td>Rp3.870</td><td class="naik">+14.84%</td></tr>
+<tr><td>CPIN</td><td>Charoen Pokphand</td><td>Rp4.720</td><td class="turun">-1.46%</td></tr>
+<tr><td>EXCL</td><td>XL Axiata</td><td>Rp2.610</td><td class="turun">-3.33%</td></tr>
+<tr><td>GOTO</td><td>GoTo Gojek Tokopedia</td><td>Rp54</td><td class="naik">+0.00%</td></tr>
+<tr><td>ICBP</td><td>Indofood CBP</td><td>Rp9.675</td><td class="turun">-0.26%</td></tr>
+<tr><td>INCO</td><td>Vale Indonesia</td><td>Rp4.220</td><td class="turun">-1.17%</td></tr>
+<tr><td>INKP</td><td>Indah Kiat Pulp</td><td>Rp7.275</td><td class="turun">-0.34%</td></tr>
+<tr><td>ITMG</td><td>Indo Tambangraya</td><td>Rp22.900</td><td class="turun">-0.33%</td></tr>
+<tr><td>KLBF</td><td>Kalbe Farma</td><td>Rp1.175</td><td class="turun">-1.26%</td></tr>
+<tr><td>MAPA</td><td>Map Aktif</td><td>Rp550</td><td class="turun">-0.90%</td></tr>
+<tr><td>MBMA</td><td>Merdeka Battery</td><td>Rp484</td><td class="turun">-2.42%</td></tr>
+<tr><td>MDKA</td><td>Merdeka Copper Gold</td><td>Rp2.320</td><td class="turun">-5.31%</td></tr>
+<tr><td>PGEO</td><td>Pertamina Geothermal</td><td>Rp1.390</td><td class="turun">-1.42%</td></tr>
+<tr><td>TLKM</td><td>Telkom Indonesia</td><td>Rp3.190</td><td class="naik">+0.00%</td></tr>
+<tr><td>UNTR</td><td>United Tractors</td><td>Rp26.900</td><td class="turun">-1.10%</td></tr>
+
     </tbody>
   </table>
 <script>
@@ -50,7 +81,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {};
+const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'ADRO': 'Adaro Energy', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'ARTO': 'Bank Jago', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BMRI': 'Bank Mandiri', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INCO': 'Vale Indonesia', 'INKP': 'Indah Kiat Pulp', 'ITMG': 'Indo Tambangraya', 'KLBF': 'Kalbe Farma', 'MAPA': 'Map Aktif', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'PGEO': 'Pertamina Geothermal', 'TLKM': 'Telkom Indonesia', 'UNTR': 'United Tractors'};
 
 tabel.style.display = 'none';
 
