@@ -42,7 +42,11 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      
+      <tr><td>BBCA</td><td>Bank Central Asia</td><td>Rp7.700</td><td class="turun">-0.96%</td></tr>
+<tr><td>BBNI</td><td>Bank Negara Indonesia</td><td>Rp4.190</td><td class="naik">+0.00%</td></tr>
+<tr><td>BBRI</td><td>Bank Rakyat Indonesia</td><td>Rp4.070</td><td class="turun">-2.40%</td></tr>
+<tr><td>BBTN</td><td>Bank Tabungan Negara</td><td>Rp1.275</td><td class="naik">+0.00%</td></tr>
+
     </tbody>
   </table>
 <script>
@@ -50,7 +54,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {};
+const data = {'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara'};
 
 tabel.style.display = 'none';
 
