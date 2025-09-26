@@ -42,7 +42,9 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      
+      <tr><td>ADMR</td><td>Adaro Minerals</td><td>Rp1.015</td><td class="naik">+0.00%</td></tr>
+<tr><td>ARTO</td><td>Bank Jago</td><td>Rp2.120</td><td class="naik">+1.92%</td></tr>
+
     </tbody>
   </table>
 <script>
@@ -50,7 +52,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {};
+const data = {'ADMR': 'Adaro Minerals', 'ARTO': 'Bank Jago'};
 
 tabel.style.display = 'none';
 
