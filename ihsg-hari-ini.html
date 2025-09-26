@@ -42,7 +42,15 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      
+      <tr><td>BBNI</td><td>Bank Negara Indonesia</td><td>Rp4.150</td><td class="turun">-0.95%</td></tr>
+<tr><td>BRPT</td><td>Barito Pacific</td><td>Rp3.670</td><td class="naik">+4.56%</td></tr>
+<tr><td>CPIN</td><td>Charoen Pokphand</td><td>Rp4.880</td><td class="naik">+1.24%</td></tr>
+<tr><td>CTRA</td><td>Ciputra Development</td><td>Rp935</td><td class="turun">-1.06%</td></tr>
+<tr><td>EXCL</td><td>XL Axiata</td><td>Rp2.740</td><td class="naik">+1.48%</td></tr>
+<tr><td>GOTO</td><td>GoTo Gojek Tokopedia</td><td>Rp57</td><td class="naik">+3.64%</td></tr>
+<tr><td>MAPI</td><td>Mitra Adiperkasa</td><td>Rp1.130</td><td class="turun">-0.44%</td></tr>
+<tr><td>PGEO</td><td>Pertamina Geothermal</td><td>Rp1.345</td><td class="naik">+1.51%</td></tr>
+
     </tbody>
   </table>
 <script>
@@ -50,7 +58,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {};
+const data = {'BBNI': 'Bank Negara Indonesia', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'MAPI': 'Mitra Adiperkasa', 'PGEO': 'Pertamina Geothermal'};
 
 tabel.style.display = 'none';
 
