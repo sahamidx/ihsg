@@ -42,7 +42,10 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      
+      <tr><td>ASII</td><td>Astra International</td><td>Rp5.900</td><td class="naik">+2.16%</td></tr>
+<tr><td>PGEO</td><td>Pertamina Geothermal</td><td>Rp1.365</td><td class="naik">+3.02%</td></tr>
+<tr><td>TOWR</td><td>Sarana Menara Nusantara</td><td>Rp585</td><td class="naik">+0.00%</td></tr>
+
     </tbody>
   </table>
 <script>
@@ -50,7 +53,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {};
+const data = {'ASII': 'Astra International', 'PGEO': 'Pertamina Geothermal', 'TOWR': 'Sarana Menara Nusantara'};
 
 tabel.style.display = 'none';
 
