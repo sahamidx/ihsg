@@ -42,16 +42,7 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      <tr><td>ADRO</td><td>Adaro Energy</td><td>Rp1.735</td><td class="naik">+2.06%</td></tr>
-<tr><td>AMRT</td><td>Alfamart</td><td>Rp1.870</td><td class="turun">-0.27%</td></tr>
-<tr><td>ASII</td><td>Astra International</td><td>Rp5.800</td><td class="turun">-1.28%</td></tr>
-<tr><td>BBCA</td><td>Bank Central Asia</td><td>Rp7.750</td><td class="naik">+1.64%</td></tr>
-<tr><td>BMRI</td><td>Bank Mandiri</td><td>Rp4.420</td><td class="naik">+0.00%</td></tr>
-<tr><td>CTRA</td><td>Ciputra Development</td><td>Rp935</td><td class="naik">+0.00%</td></tr>
-<tr><td>ITMG</td><td>Indo Tambangraya</td><td>Rp22.900</td><td class="naik">+0.66%</td></tr>
-<tr><td>PGAS</td><td>Perusahaan Gas Negara</td><td>Rp1.705</td><td class="turun">-0.29%</td></tr>
-<tr><td>PGEO</td><td>Pertamina Geothermal</td><td>Rp1.375</td><td class="naik">+2.23%</td></tr>
-
+      
     </tbody>
   </table>
 <script>
@@ -59,7 +50,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {'ADRO': 'Adaro Energy', 'AMRT': 'Alfamart', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BMRI': 'Bank Mandiri', 'CTRA': 'Ciputra Development', 'ITMG': 'Indo Tambangraya', 'PGAS': 'Perusahaan Gas Negara', 'PGEO': 'Pertamina Geothermal'};
+const data = {};
 
 tabel.style.display = 'none';
 
