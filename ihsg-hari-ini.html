@@ -42,12 +42,7 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      <tr><td>BMRI</td><td>Bank Mandiri</td><td>Rp4.420</td><td class="naik">+0.00%</td></tr>
-<tr><td>BRIS</td><td>BRI Syariah</td><td>Rp2.600</td><td class="turun">-2.62%</td></tr>
-<tr><td>MBMA</td><td>Merdeka Battery</td><td>Rp670</td><td class="naik">+15.52%</td></tr>
-<tr><td>MDKA</td><td>Merdeka Copper Gold</td><td>Rp2.260</td><td class="naik">+1.80%</td></tr>
-<tr><td>PTBA</td><td>Bukit Asam</td><td>Rp2.320</td><td class="turun">-1.28%</td></tr>
-
+      
     </tbody>
   </table>
 <script>
@@ -55,7 +50,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {'BMRI': 'Bank Mandiri', 'BRIS': 'BRI Syariah', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'PTBA': 'Bukit Asam'};
+const data = {};
 
 tabel.style.display = 'none';
 
