@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Harga Saham Hari Ini – Senin, 29 September 2025</title>
+  <title>Harga Saham Hari Ini – Selasa, 30 September 2025</title>
   <meta name="description" content="Harga saham LQ45 dan IHSG hari ini, termasuk BBCA, BBRI, TLKM, dan lainnya. Update otomatis setiap 30 menit.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
@@ -33,7 +33,7 @@
 </head>
 <body>
   <h1>Saham Hari Ini</h1>
-  <p>Harga Saham Hari Ini – Senin, 29 September 2025</p>
+  <p>Harga Saham Hari Ini – Selasa, 30 September 2025</p>
   
     <h2>IHSG Hari Ini</h2>
     <div class="ihsg-box naik">8.131 (+0.40%)</div>
@@ -58,12 +58,13 @@
 <tr><td>BBNI</td><td>Bank Negara Indonesia</td><td>Rp4.120</td><td class="turun">-1.44%</td></tr>
 <tr><td>BBRI</td><td>Bank Rakyat Indonesia</td><td>Rp3.990</td><td class="turun">-1.24%</td></tr>
 <tr><td>BBTN</td><td>Bank Tabungan Negara</td><td>Rp1.290</td><td class="turun">-0.77%</td></tr>
-<tr><td>BMRI</td><td>Bank Mandiri</td><td>Rp4.420</td><td class="naik">+0.00%</td></tr>
+<tr><td>BMRI</td><td>Bank Mandiri</td><td>Rp4.400</td><td class="turun">-0.45%</td></tr>
 <tr><td>BRIS</td><td>BRI Syariah</td><td>Rp2.600</td><td class="turun">-2.62%</td></tr>
 <tr><td>BRPT</td><td>Barito Pacific</td><td>Rp3.840</td><td class="naik">+4.07%</td></tr>
 <tr><td>CPIN</td><td>Charoen Pokphand</td><td>Rp4.800</td><td class="turun">-0.83%</td></tr>
 <tr><td>CTRA</td><td>Ciputra Development</td><td>Rp935</td><td class="naik">+0.00%</td></tr>
-<tr><td>EXCL</td><td>XL Axiata</td><td>Rp2.750</td><td class="naik">+1.10%</td></tr>
+<tr><td>ESSA</td><td>Surya Esa Perkasa</td><td>Rp705</td><td class="naik">+8.46%</td></tr>
+<tr><td>EXCL</td><td>XL Axiata</td><td>Rp2.710</td><td class="turun">-0.37%</td></tr>
 <tr><td>GOTO</td><td>GoTo Gojek Tokopedia</td><td>Rp56</td><td class="turun">-1.75%</td></tr>
 <tr><td>ICBP</td><td>Indofood CBP</td><td>Rp9.825</td><td class="turun">-1.75%</td></tr>
 <tr><td>INCO</td><td>Vale Indonesia</td><td>Rp4.450</td><td class="naik">+3.97%</td></tr>
@@ -91,7 +92,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'ADRO': 'Adaro Energy', 'AKRA': 'AKR Corporindo', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'ARTO': 'Bank Jago', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BMRI': 'Bank Mandiri', 'BRIS': 'BRI Syariah', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INCO': 'Vale Indonesia', 'INKP': 'Indah Kiat Pulp', 'ISAT': 'Indosat Ooredoo Hutchison', 'ITMG': 'Indo Tambangraya', 'JSMR': 'Jasa Marga', 'KLBF': 'Kalbe Farma', 'MAPA': 'Map Aktif', 'MAPI': 'Mitra Adiperkasa', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'PGAS': 'Perusahaan Gas Negara', 'PGEO': 'Pertamina Geothermal', 'PTBA': 'Bukit Asam', 'SIDO': 'Sido Muncul', 'TLKM': 'Telkom Indonesia', 'TOWR': 'Sarana Menara Nusantara', 'UNVR': 'Unilever Indonesia'};
+const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'ADRO': 'Adaro Energy', 'AKRA': 'AKR Corporindo', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'ARTO': 'Bank Jago', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BMRI': 'Bank Mandiri', 'BRIS': 'BRI Syariah', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'ESSA': 'Surya Esa Perkasa', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INCO': 'Vale Indonesia', 'INKP': 'Indah Kiat Pulp', 'ISAT': 'Indosat Ooredoo Hutchison', 'ITMG': 'Indo Tambangraya', 'JSMR': 'Jasa Marga', 'KLBF': 'Kalbe Farma', 'MAPA': 'Map Aktif', 'MAPI': 'Mitra Adiperkasa', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'PGAS': 'Perusahaan Gas Negara', 'PGEO': 'Pertamina Geothermal', 'PTBA': 'Bukit Asam', 'SIDO': 'Sido Muncul', 'TLKM': 'Telkom Indonesia', 'TOWR': 'Sarana Menara Nusantara', 'UNVR': 'Unilever Indonesia'};
 
 tabel.style.display = 'none';
 
