@@ -35,9 +35,6 @@
   <h1>Saham Hari Ini</h1>
   <p>Harga Saham Hari Ini – Kamis, 06 November 2025</p>
   
-    <h2>IHSG Hari Ini</h2>
-    <div class="ihsg-box naik">8.329 (+0.12%)</div>
-    
   <input type="text" id="cari" placeholder="Cari saham BBRI, Telkom, Unilever...">
   <div id="hasil"></div>
   <table id="tabel">
@@ -64,24 +61,19 @@
 <tr><td>CPIN</td><td>Charoen Pokphand</td><td>Rp4.830</td><td class="naik">+0.42%</td></tr>
 <tr><td>CTRA</td><td>Ciputra Development</td><td>Rp895</td><td class="turun">-0.56%</td></tr>
 <tr><td>ESSA</td><td>Surya Esa Perkasa</td><td>Rp625</td><td class="naik">+1.63%</td></tr>
-<tr><td>EXCL</td><td>XL Axiata</td><td>Rp2.740</td><td class="naik">+1.48%</td></tr>
 <tr><td>GOTO</td><td>GoTo Gojek Tokopedia</td><td>Rp61</td><td class="turun">-1.61%</td></tr>
 <tr><td>ICBP</td><td>Indofood CBP</td><td>Rp8.625</td><td class="turun">-0.86%</td></tr>
 <tr><td>INCO</td><td>Vale Indonesia</td><td>Rp4.590</td><td class="turun">-1.50%</td></tr>
 <tr><td>INDF</td><td>Indofood Sukses Makmur</td><td>Rp7.075</td><td class="turun">-0.70%</td></tr>
 <tr><td>INKP</td><td>Indah Kiat Pulp</td><td>Rp7.475</td><td class="naik">+0.34%</td></tr>
-<tr><td>ISAT</td><td>Indosat Ooredoo Hutchison</td><td>Rp1.975</td><td class="naik">+1.54%</td></tr>
-<tr><td>ITMG</td><td>Indo Tambangraya</td><td>Rp23.475</td><td class="turun">-0.53%</td></tr>
 <tr><td>JPFA</td><td>Japfa Comfeed</td><td>Rp2.430</td><td class="turun">-0.41%</td></tr>
 <tr><td>JSMR</td><td>Jasa Marga</td><td>Rp3.510</td><td class="turun">-0.85%</td></tr>
 <tr><td>KLBF</td><td>Kalbe Farma</td><td>Rp1.275</td><td class="turun">-3.41%</td></tr>
-<tr><td>MAPA</td><td>Map Aktif</td><td>Rp780</td><td class="turun">-1.89%</td></tr>
 <tr><td>MAPI</td><td>Mitra Adiperkasa</td><td>Rp1.450</td><td class="naik">+2.84%</td></tr>
 <tr><td>MBMA</td><td>Merdeka Battery</td><td>Rp650</td><td class="naik">+0.78%</td></tr>
 <tr><td>MDKA</td><td>Merdeka Copper Gold</td><td>Rp2.470</td><td class="naik">+1.65%</td></tr>
 <tr><td>MEDC</td><td>Medco Energi</td><td>Rp1.325</td><td class="turun">-1.12%</td></tr>
 <tr><td>PGAS</td><td>Perusahaan Gas Negara</td><td>Rp1.710</td><td class="naik">+0.29%</td></tr>
-<tr><td>PGEO</td><td>Pertamina Geothermal</td><td>Rp1.275</td><td class="naik">+0.39%</td></tr>
 <tr><td>PTBA</td><td>Bukit Asam</td><td>Rp2.400</td><td class="naik">+0.84%</td></tr>
 <tr><td>SIDO</td><td>Sido Muncul</td><td>Rp575</td><td class="turun">-0.86%</td></tr>
 <tr><td>SMGR</td><td>Semen Indonesia</td><td>Rp2.870</td><td class="naik">+2.50%</td></tr>
@@ -98,7 +90,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'ADRO': 'Adaro Energy', 'AKRA': 'AKR Corporindo', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'ARTO': 'Bank Jago', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BMRI': 'Bank Mandiri', 'BRIS': 'BRI Syariah', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'ESSA': 'Surya Esa Perkasa', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INCO': 'Vale Indonesia', 'INDF': 'Indofood Sukses Makmur', 'INKP': 'Indah Kiat Pulp', 'ISAT': 'Indosat Ooredoo Hutchison', 'ITMG': 'Indo Tambangraya', 'JPFA': 'Japfa Comfeed', 'JSMR': 'Jasa Marga', 'KLBF': 'Kalbe Farma', 'MAPA': 'Map Aktif', 'MAPI': 'Mitra Adiperkasa', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'MEDC': 'Medco Energi', 'PGAS': 'Perusahaan Gas Negara', 'PGEO': 'Pertamina Geothermal', 'PTBA': 'Bukit Asam', 'SIDO': 'Sido Muncul', 'SMGR': 'Semen Indonesia', 'SMRA': 'Summarecon', 'TLKM': 'Telkom Indonesia', 'TOWR': 'Sarana Menara Nusantara', 'UNTR': 'United Tractors', 'UNVR': 'Unilever Indonesia'};
+const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'ADRO': 'Adaro Energy', 'AKRA': 'AKR Corporindo', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'ARTO': 'Bank Jago', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BMRI': 'Bank Mandiri', 'BRIS': 'BRI Syariah', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'ESSA': 'Surya Esa Perkasa', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INCO': 'Vale Indonesia', 'INDF': 'Indofood Sukses Makmur', 'INKP': 'Indah Kiat Pulp', 'JPFA': 'Japfa Comfeed', 'JSMR': 'Jasa Marga', 'KLBF': 'Kalbe Farma', 'MAPI': 'Mitra Adiperkasa', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'MEDC': 'Medco Energi', 'PGAS': 'Perusahaan Gas Negara', 'PTBA': 'Bukit Asam', 'SIDO': 'Sido Muncul', 'SMGR': 'Semen Indonesia', 'SMRA': 'Summarecon', 'TLKM': 'Telkom Indonesia', 'TOWR': 'Sarana Menara Nusantara', 'UNTR': 'United Tractors', 'UNVR': 'Unilever Indonesia'};
 
 tabel.style.display = 'none';
 
