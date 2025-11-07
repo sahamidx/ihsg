@@ -35,9 +35,6 @@
   <h1>Saham Hari Ini</h1>
   <p>Harga Saham Hari Ini – Jumat, 07 November 2025</p>
   
-    <h2>IHSG Hari Ini</h2>
-    <div class="ihsg-box naik">8.395 (+0.70%)</div>
-    
   <input type="text" id="cari" placeholder="Cari saham BBRI, Telkom, Unilever...">
   <div id="hasil"></div>
   <table id="tabel">
@@ -47,7 +44,6 @@
     <tbody>
       <tr><td>ACES</td><td>Ace Hardware</td><td>Rp458</td><td class="naik">+2.69%</td></tr>
 <tr><td>ADMR</td><td>Adaro Minerals</td><td>Rp1.400</td><td class="naik">+0.00%</td></tr>
-<tr><td>ADRO</td><td>Adaro Energy</td><td>Rp1.945</td><td class="naik">+1.30%</td></tr>
 <tr><td>AKRA</td><td>AKR Corporindo</td><td>Rp1.250</td><td class="naik">+0.40%</td></tr>
 <tr><td>AMMN</td><td>Amman Mineral</td><td>Rp7.025</td><td class="naik">+0.00%</td></tr>
 <tr><td>AMRT</td><td>Alfamart</td><td>Rp1.910</td><td class="naik">+0.53%</td></tr>
@@ -98,7 +94,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'ADRO': 'Adaro Energy', 'AKRA': 'AKR Corporindo', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'ARTO': 'Bank Jago', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BMRI': 'Bank Mandiri', 'BRIS': 'BRI Syariah', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'ESSA': 'Surya Esa Perkasa', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INCO': 'Vale Indonesia', 'INDF': 'Indofood Sukses Makmur', 'INKP': 'Indah Kiat Pulp', 'ISAT': 'Indosat Ooredoo Hutchison', 'ITMG': 'Indo Tambangraya', 'JPFA': 'Japfa Comfeed', 'JSMR': 'Jasa Marga', 'KLBF': 'Kalbe Farma', 'MAPA': 'Map Aktif', 'MAPI': 'Mitra Adiperkasa', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'MEDC': 'Medco Energi', 'PGAS': 'Perusahaan Gas Negara', 'PGEO': 'Pertamina Geothermal', 'PTBA': 'Bukit Asam', 'SIDO': 'Sido Muncul', 'SMGR': 'Semen Indonesia', 'SMRA': 'Summarecon', 'TLKM': 'Telkom Indonesia', 'TOWR': 'Sarana Menara Nusantara', 'UNTR': 'United Tractors', 'UNVR': 'Unilever Indonesia'};
+const data = {'ACES': 'Ace Hardware', 'ADMR': 'Adaro Minerals', 'AKRA': 'AKR Corporindo', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'ARTO': 'Bank Jago', 'ASII': 'Astra International', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BMRI': 'Bank Mandiri', 'BRIS': 'BRI Syariah', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'ESSA': 'Surya Esa Perkasa', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INCO': 'Vale Indonesia', 'INDF': 'Indofood Sukses Makmur', 'INKP': 'Indah Kiat Pulp', 'ISAT': 'Indosat Ooredoo Hutchison', 'ITMG': 'Indo Tambangraya', 'JPFA': 'Japfa Comfeed', 'JSMR': 'Jasa Marga', 'KLBF': 'Kalbe Farma', 'MAPA': 'Map Aktif', 'MAPI': 'Mitra Adiperkasa', 'MBMA': 'Merdeka Battery', 'MDKA': 'Merdeka Copper Gold', 'MEDC': 'Medco Energi', 'PGAS': 'Perusahaan Gas Negara', 'PGEO': 'Pertamina Geothermal', 'PTBA': 'Bukit Asam', 'SIDO': 'Sido Muncul', 'SMGR': 'Semen Indonesia', 'SMRA': 'Summarecon', 'TLKM': 'Telkom Indonesia', 'TOWR': 'Sarana Menara Nusantara', 'UNTR': 'United Tractors', 'UNVR': 'Unilever Indonesia'};
 
 tabel.style.display = 'none';
 
