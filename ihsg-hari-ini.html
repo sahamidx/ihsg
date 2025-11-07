@@ -35,9 +35,6 @@
   <h1>Saham Hari Ini</h1>
   <p>Harga Saham Hari Ini – Jumat, 07 November 2025</p>
   
-    <h2>IHSG Hari Ini</h2>
-    <div class="ihsg-box naik">8.395 (+0.70%)</div>
-    
   <input type="text" id="cari" placeholder="Cari saham BBRI, Telkom, Unilever...">
   <div id="hasil"></div>
   <table id="tabel">
@@ -45,36 +42,7 @@
       <tr><th>Kode</th><th>Perusahaan</th><th>Harga</th><th>Perubahan</th></tr>
     </thead>
     <tbody>
-      <tr><td>ADRO</td><td>Adaro Energy</td><td>Rp1.945</td><td class="naik">+1.30%</td></tr>
-<tr><td>AKRA</td><td>AKR Corporindo</td><td>Rp1.250</td><td class="naik">+0.40%</td></tr>
-<tr><td>AMMN</td><td>Amman Mineral</td><td>Rp7.025</td><td class="naik">+0.00%</td></tr>
-<tr><td>AMRT</td><td>Alfamart</td><td>Rp1.910</td><td class="naik">+0.53%</td></tr>
-<tr><td>ANTM</td><td>Aneka Tambang</td><td>Rp2.900</td><td class="turun">-1.02%</td></tr>
-<tr><td>BBCA</td><td>Bank Central Asia</td><td>Rp8.675</td><td class="naik">+1.46%</td></tr>
-<tr><td>BBNI</td><td>Bank Negara Indonesia</td><td>Rp4.500</td><td class="naik">+1.35%</td></tr>
-<tr><td>BBRI</td><td>Bank Rakyat Indonesia</td><td>Rp3.980</td><td class="turun">-0.50%</td></tr>
-<tr><td>BBTN</td><td>Bank Tabungan Negara</td><td>Rp1.230</td><td class="naik">+0.41%</td></tr>
-<tr><td>BRIS</td><td>BRI Syariah</td><td>Rp2.510</td><td class="naik">+0.80%</td></tr>
-<tr><td>BRPT</td><td>Barito Pacific</td><td>Rp3.590</td><td class="naik">+0.56%</td></tr>
-<tr><td>CPIN</td><td>Charoen Pokphand</td><td>Rp4.620</td><td class="turun">-2.94%</td></tr>
-<tr><td>CTRA</td><td>Ciputra Development</td><td>Rp895</td><td class="naik">+0.00%</td></tr>
-<tr><td>EXCL</td><td>XL Axiata</td><td>Rp2.740</td><td class="naik">+0.00%</td></tr>
-<tr><td>GOTO</td><td>GoTo Gojek Tokopedia</td><td>Rp61</td><td class="naik">+0.00%</td></tr>
-<tr><td>ICBP</td><td>Indofood CBP</td><td>Rp8.600</td><td class="naik">+0.29%</td></tr>
-<tr><td>INDF</td><td>Indofood Sukses Makmur</td><td>Rp7.125</td><td class="naik">+1.42%</td></tr>
-<tr><td>ISAT</td><td>Indosat Ooredoo Hutchison</td><td>Rp2.150</td><td class="naik">+8.86%</td></tr>
-<tr><td>ITMG</td><td>Indo Tambangraya</td><td>Rp23.400</td><td class="naik">+0.00%</td></tr>
-<tr><td>JPFA</td><td>Japfa Comfeed</td><td>Rp2.300</td><td class="turun">-4.96%</td></tr>
-<tr><td>KLBF</td><td>Kalbe Farma</td><td>Rp1.265</td><td class="naik">+1.20%</td></tr>
-<tr><td>MAPI</td><td>Mitra Adiperkasa</td><td>Rp1.390</td><td class="turun">-3.47%</td></tr>
-<tr><td>MEDC</td><td>Medco Energi</td><td>Rp1.320</td><td class="turun">-0.75%</td></tr>
-<tr><td>PGAS</td><td>Perusahaan Gas Negara</td><td>Rp1.760</td><td class="naik">+2.03%</td></tr>
-<tr><td>PGEO</td><td>Pertamina Geothermal</td><td>Rp1.270</td><td class="turun">-0.39%</td></tr>
-<tr><td>PTBA</td><td>Bukit Asam</td><td>Rp2.390</td><td class="turun">-0.42%</td></tr>
-<tr><td>SIDO</td><td>Sido Muncul</td><td>Rp565</td><td class="turun">-1.74%</td></tr>
-<tr><td>SMRA</td><td>Summarecon</td><td>Rp396</td><td class="naik">+0.00%</td></tr>
-<tr><td>UNTR</td><td>United Tractors</td><td>Rp27.500</td><td class="naik">+0.46%</td></tr>
-
+      
     </tbody>
   </table>
 <script>
@@ -82,7 +50,7 @@ const input = document.getElementById('cari');
 const tabel = document.getElementById('tabel');
 const tbody = tabel.getElementsByTagName('tbody')[0];
 const hasil = document.getElementById('hasil');
-const data = {'ADRO': 'Adaro Energy', 'AKRA': 'AKR Corporindo', 'AMMN': 'Amman Mineral', 'AMRT': 'Alfamart', 'ANTM': 'Aneka Tambang', 'BBCA': 'Bank Central Asia', 'BBNI': 'Bank Negara Indonesia', 'BBRI': 'Bank Rakyat Indonesia', 'BBTN': 'Bank Tabungan Negara', 'BRIS': 'BRI Syariah', 'BRPT': 'Barito Pacific', 'CPIN': 'Charoen Pokphand', 'CTRA': 'Ciputra Development', 'EXCL': 'XL Axiata', 'GOTO': 'GoTo Gojek Tokopedia', 'ICBP': 'Indofood CBP', 'INDF': 'Indofood Sukses Makmur', 'ISAT': 'Indosat Ooredoo Hutchison', 'ITMG': 'Indo Tambangraya', 'JPFA': 'Japfa Comfeed', 'KLBF': 'Kalbe Farma', 'MAPI': 'Mitra Adiperkasa', 'MEDC': 'Medco Energi', 'PGAS': 'Perusahaan Gas Negara', 'PGEO': 'Pertamina Geothermal', 'PTBA': 'Bukit Asam', 'SIDO': 'Sido Muncul', 'SMRA': 'Summarecon', 'UNTR': 'United Tractors'};
+const data = {};
 
 tabel.style.display = 'none';
 
